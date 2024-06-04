@@ -96,7 +96,7 @@ def compress_json(data, method="gzip"):
 @server.PromptServer.instance.routes.post("/agl/get_translation")
 async def get_translation(request: web.Request):
     post = await request.post()
-    locale = post.get("locale", "en_US")
+    locale = post.get("locale", "zh-CN")
     accept_encoding = request.headers.get("Accept-Encoding", "")
     json_data = "{}"
     headers = {}
