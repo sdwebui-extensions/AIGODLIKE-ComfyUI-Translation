@@ -42,6 +42,7 @@ https://github.com/AIGODLIKE/AIGODLIKE-COMFYUI-TRANSLATION/assets/116185401/e431
 |[BiRefNet](https://github.com/viperyl/ComfyUI-BiRefNet.git)|√|TODO|√|TODO|TODO|TODO|
 |[BrushNet (kijai)](https://github.com/kijai/ComfyUI-BrushNet-Wrapper.git)|√|TODO|√|TODO|TODO|TODO|
 |[BrushNet (nullquant)](https://github.com/nullquant/ComfyUI-BrushNet.git)|√|TODO|√|TODO|TODO|TODO|
+|[Bxb](https://github.com/zhulu111/ComfyUI_Bxb.git)|√|TODO|√|TODO|TODO|TODO|
 |[CCSR](https://github.com/kijai/ComfyUI-CCSR.git)|√|TODO|√|TODO|TODO|TODO|
 |[Champ](https://github.com/chaojie/ComfyUI-Champ.git)|√|TODO|√|TODO|TODO|TODO|
 |[CLIP Seg](https://github.com/biegert/ComfyUI-CLIPSeg)|√|√|√|√|TODO|TODO|
@@ -135,6 +136,7 @@ https://github.com/AIGODLIKE/AIGODLIKE-COMFYUI-TRANSLATION/assets/116185401/e431
 |[TiledDiffusion](https://github.com/shiimizu/ComfyUI-TiledDiffusion)|√|TODO|√|TODO|TODO|TODO|
 |[TiledKSampler](https://github.com/BlenderNeko/ComfyUI_TiledKSampler)|√|√|√|√|TODO|TODO|
 |[TinyTerra](https://github.com/TinyTerra/ComfyUI_tinyterraNodes.git)|√|TODO|√|TODO|TODO|TODO|TODO|
+|[ToonCrafter](https://github.com/AIGODLIKE/ComfyUI-ToonCrafter.git)|√|TODO|√|TODO|TODO|TODO|TODO|
 |[TripoAPI](https://github.com/VAST-AI-Research/ComfyUI-Tripo.git)|√|TODO|√|TODO|TODO|TODO|
 |[UltimateSDUpscale](https://github.com/ssitu/ComfyUI_UltimateSDUpscale)|√|√|√|TODO|TODO|TODO|
 |[Vextra Nodes](https://github.com/diontimmer/ComfyUI-Vextra-Nodes)|√|√|√|TODO|TODO|TODO|
