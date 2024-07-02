@@ -16,7 +16,7 @@ export class TUtils {
   static ELS = {};
 
   static setLocale(locale) {
-    localStorage[TUtils.LOCALE_ID_LAST] = localStorage.getItem(TUtils.LOCALE_ID) || "en-US";
+    localStorage[TUtils.LOCALE_ID_LAST] = localStorage.getItem(TUtils.LOCALE_ID) || "zh-CN";
     localStorage[TUtils.LOCALE_ID] = locale;
     setTimeout(() => {
       location.reload();
@@ -24,7 +24,7 @@ export class TUtils {
   }
 
   static syncTranslation(OnFinished = () => {}) {
-    var locale = localStorage.getItem(TUtils.LOCALE_ID) || "en-US";
+    var locale = localStorage.getItem(TUtils.LOCALE_ID) || "zh-CN";
     if (localStorage.getItem(TUtils.LOCALE_ID) === null) {
       // 有可能菜单设置了zh-CN但 loacalStorage为空, 这时不会刷新
       let slocal = localStorage.getItem(`Comfy.Settings.${TUtils.LOCALE_ID}`);
@@ -338,7 +338,7 @@ export class TUtils {
           ]),
         ]);
       },
-      defaultValue: localStorage[id] || "en-US",
+      defaultValue: localStorage[id] || "zh-CN",
       async onChange(value) {
         if (!value) return;
         if (localStorage[id] != undefined && value != localStorage[id]) {
@@ -416,9 +416,9 @@ const ext = {
         id: "swlocale-button",
         textContent: TUtils.T.Menu["Switch Locale"] || "Switch Locale",
         onclick: () => {
-          var localeLast = localStorage.getItem(TUtils.LOCALE_ID_LAST) || "en-US";
-          var locale = localStorage.getItem(TUtils.LOCALE_ID) || "en-US";
-          if (locale != "en-US" && localeLast != "en-US") localeLast = "en-US";
+          var localeLast = localStorage.getItem(TUtils.LOCALE_ID_LAST) || "zh-CN";
+          var locale = localStorage.getItem(TUtils.LOCALE_ID) || "zh-CN";
+          if (locale != "zh-CN" && localeLast != "zh-CN") localeLast = "zh-CN";
           if (locale != localeLast) {
             app.ui.settings.setSettingValue(TUtils.LOCALE_ID, localeLast);
           }
