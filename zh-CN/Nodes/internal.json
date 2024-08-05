@@ -169,6 +169,20 @@
             "SIGMAS": "Sigmas"
         }
     },
+    "BetaSamplingScheduler": {
+        "title": "Beta调度器",
+        "inputs": {
+            "model": "模型"
+        },
+        "widgets": {
+            "steps": "步数",
+            "alpha": "alpha",
+            "beta": "beta"
+        },
+        "outputs": {
+            "SIGMAS": "Sigmas"
+        }
+    },
 
 
     "KSamplerSelect": {
@@ -699,6 +713,71 @@
     },
 
 
+    "ControlNetApply": {
+        "title": "ControlNet应用",
+        "inputs": {
+            "conditioning": "条件",
+            "control_net": "ControlNet",
+            "image": "图像"
+        },
+        "widgets": {
+            "strength": "强度"
+        },
+        "outputs": {
+            "CONDITIONING": "条件"
+        }
+    },
+    "ControlNetApplyAdvanced": {
+        "title": "ControlNet应用(高级)",
+        "inputs": {
+            "positive": "正面条件",
+            "negative": "负面条件",
+            "control_net": "ControlNet",
+            "image": "图像"
+        },
+        "widgets": {
+            "strength": "强度",
+            "start_percent": "开始时间",
+            "end_percent": "结束时间"
+        },
+        "outputs": {
+            "positive": "正面条件",
+            "negative": "负面条件"
+        }
+    },
+    "ControlNetApplySD3": {
+        "title": "ControlNet应用_SD3",
+        "inputs": {
+            "positive": "正面条件",
+            "negative": "负面条件",
+            "control_net": "ControlNet",
+            "vae": "VAE",
+            "image": "图像"
+        },
+        "widgets": {
+            "strength": "强度",
+            "start_percent": "开始时间",
+            "end_percent": "结束时间"
+        },
+        "outputs": {
+            "positive": "正面条件",
+            "negative": "负面条件"
+        }
+    },
+    "SetUnionControlNetType": {
+        "title": "设置UnionControlNet类型",
+        "inputs": {
+            "control_net": "ControlNet"
+        },
+        "widgets": {
+            "type": "类型"
+        },
+        "outputs": {
+            "CONTROL_NET": "ControlNet"
+        }
+    },
+
+
     "SD_4XUpscale_Conditioning": {
         "title": "SD4X放大条件",
         "inputs": {
@@ -882,38 +961,6 @@
         },
         "outputs": {
             "CONDITIONING": "条件"
-        }
-    },
-    "ControlNetApply": {
-        "title": "ControlNet应用",
-        "inputs": {
-            "conditioning": "条件",
-            "control_net": "ControlNet",
-            "image": "图像"
-        },
-        "widgets": {
-            "strength": "强度"
-        },
-        "outputs": {
-            "CONDITIONING": "条件"
-        }
-    },
-    "ControlNetApplyAdvanced": {
-        "title": "ControlNet应用(高级)",
-        "inputs": {
-            "positive": "正面条件",
-            "negative": "负面条件",
-            "control_net": "ControlNet",
-            "image": "图像"
-        },
-        "widgets": {
-            "strength": "强度",
-            "start_percent": "开始时间",
-            "end_percent": "结束时间"
-        },
-        "outputs": {
-            "positive": "正面条件",
-            "negative": "负面条件"
         }
     },
 
@@ -1795,27 +1842,6 @@
     },
 
 
-    "ControlNetApplySD3": {
-        "title": "ControlNet应用_SD3",
-        "inputs": {
-            "positive": "正面条件",
-            "negative": "负面条件",
-            "control_net": "ControlNet",
-            "vae": "VAE",
-            "image": "图像"
-        },
-        "widgets": {
-            "strength": "强度",
-            "start_percent": "开始时间",
-            "end_percent": "结束时间"
-        },
-        "outputs": {
-            "positive": "正面条件",
-            "negative": "负面条件"
-        }
-    },
-
-
     "UNetSelfAttentionMultiply": {
         "title": "UNet自注意力乘数",
         "inputs": {
@@ -2182,6 +2208,16 @@
             "SAMPLER": "采样器"
         }
     },
+    "SamplerEulerAncestralCFGPP": {
+        "title": "Euler_A_CFG++采样器",
+        "widgets": {
+            "eta": "eta",
+            "s_noise": "s_noise"
+        },
+        "outputs": {
+            "SAMPLER": "采样器"
+        }
+    },
 
 
 
@@ -2321,6 +2357,15 @@
             "CONDITIONING": "条件"
         }
     },
+    "CLIPTextEncodeHunyuanDiT": {
+        "title": "CLIP文本编码Hunyuan",
+        "inputs": {
+            "clip": "CLIP"
+        },
+        "outputs": {
+            "CONDITIONING": "条件"
+        }
+    },
 
 
     "ModelMergeSD1": {
@@ -2345,6 +2390,16 @@
     },
     "ModelMergeSDXL": {
         "title": "模型融合(SDXL)",
+        "inputs": {
+            "model1": "模型1",
+            "model2": "模型2"
+        },
+        "outputs": {
+            "MODEL": "模型"
+        }
+    },
+    "ModelMergeSD3_2B": {
+        "title": "模型融合(SD3_2B)",
         "inputs": {
             "model1": "模型1",
             "model2": "模型2"
@@ -2545,6 +2600,18 @@
     },
     "ModelSamplingSD3": {
         "title": "模型采样算法SD3",
+        "inputs": {
+            "model": "模型"
+        },
+        "widgets": {
+            "shift": "偏移"
+        },
+        "outputs": {
+            "MODEL": "模型"
+        }
+    },
+    "ModelSamplingAuraFlow": {
+        "title": "模型采样算法AuraFlow",
         "inputs": {
             "model": "模型"
         },
