@@ -1,5 +1,8 @@
 class TExe {
   static T = null;
+  MT(txt) {
+    return this.T?.Menu?.[txt] || this.T?.Menu?.[txt?.trim?.()];
+  }
 
   constructor() {
     this.excludeClass = ["lite-search-item-type"];
@@ -31,44 +34,52 @@ class TExe {
     const allElements = node.querySelectorAll("*");
 
     for (const ele of allElements) {
-      let targetLangText = T.Menu[ele.innerText];
-      if (!targetLangText) {
-        if (ele.nodeName === "INPUT" && ele.type === "button") {
-          targetLangText = T.Menu[ele.value];
-          if (!targetLangText) continue;
-          ele.value = targetLangText;
-        }
-        continue;
-      }
+      // let targetLangText = this.MT(ele.innerText) || this.MT(ele.value) || this.MT(ele.title);
+      // if (!targetLangText) {
+      //   if (ele.nodeName === "INPUT" && ele.type === "button") {
+      //     targetLangText = this.MT(ele.value);
+      //     if (!targetLangText) continue;
+      //     ele.value = targetLangText;
+      //   }else if (ele.childNodes?.length > 1) {
+      //     this.replaceText(ele);
+      //   }
+      //   continue;
+      // }
       this.replaceText(ele);
     }
   }
 
   replaceText(target) {
-    let T = this.T;
-    if (!T) return;
+    if (!target) return;
+    if (!this.T) return;
     if (this.tSkip(target)) return;
-    if (target?.childNodes.length > 1) {
-      for (const childNode of target.childNodes) {
-        this.replaceText(childNode);
-        const targetLangText = childNode?.nodeType === Node.ELEMENT_NODE ? T.Menu[childNode.innerText] : T.Menu[childNode.nodeValue];
-        if (!targetLangText) continue;
-        if (childNode?.nodeType === Node.TEXT_NODE) {
-          childNode.nodeValue = targetLangText;
-        }
-        if (childNode?.nodeType === Node.ELEMENT_NODE) {
-          childNode.innerText = targetLangText;
-        }
+    for (const childNode of target.childNodes || [])
+      this.replaceText(childNode);
+    this.replaceText(target.firstChild);
+    // 翻译target
+    if (target.nodeType === Node.TEXT_NODE) {
+      if (target.nodeValue)
+        target.nodeValue = this.MT(target.nodeValue) || target.nodeValue;
+    }
+    else if (target.nodeType === Node.ELEMENT_NODE) {
+      if (target.title)
+        target.title = this.MT(target.title) || target.title;
+
+      if (target.nodeName === "INPUT" && target.type === "button") {
+        target.value = this.MT(target.value) || target.value;
       }
-    } else {
-      if (target?.firstChild) {
-        this.replaceText(target.firstChild);
+
+      if (target.innerText && this.MT(target.innerText))
+      {
+        target.innerText = this.MT(target.innerText);
       }
-      if (target?.firstChild?.nodeType === Node.TEXT_NODE) {
-        const targetLangText = T.Menu[target.firstChild.nodeValue];
-        if (!targetLangText) return;
-        target.innerText = targetLangText;
+      
+      if (target.textContent && this.MT(target.textContent))
+      {
+        target.textContent = this.MT(target.textContent);
       }
+    }else if(target.nodeType === Node.COMMENT_NODE){
+      // pass
     }
   }
 }
@@ -83,7 +94,10 @@ export function applyMenuTranslation(T) {
         texe.translateAllText(mutation.target);
       }
     });
-
+  // texe.translateAllText(window.comfyAPI?.app?.app?.menu?.element);
+  observeFactory(document.querySelector(".comfyui-menu"), handleComfyNewUIMenu, true);
+  for (let node of document.querySelectorAll(".comfyui-popup"))
+    observeFactory(node, handleComfyNewUIMenu, true);
   const viewHistoryButton = document.getElementById("comfy-view-history-button");
   const viewQueueButton = document.getElementById("comfy-view-queue-button");
 
@@ -92,7 +106,7 @@ export function applyMenuTranslation(T) {
       observer.disconnect();
       for (let mutation of mutationsList) {
         if (mutation.type === "childList") {
-          const translatedValue = T.Menu[mutation.target.textContent];
+          const translatedValue = texe.MT(mutation.target.textContent);
           if (!translatedValue) continue;
           mutation.target.innerText = translatedValue;
         }
@@ -116,7 +130,7 @@ export function applyMenuTranslation(T) {
       for (const node of mutation.addedNodes) {
         // if (texe.translateKjPopDesc(node)) continue;
         texe.translateAllText(node);
-        if (node.classList.contains("comfy-modal")) {
+        if (node.classList?.contains("comfy-modal")) {
           observeFactory(node, (mutationsList, observer) => {
             for (let mutation of mutationsList) {
               texe.translateAllText(mutation.target);
@@ -176,12 +190,12 @@ export function applyMenuTranslation(T) {
     const comfySettingDialogAllElements = comfySettingDialog.querySelectorAll("*");
 
     for (const ele of comfySettingDialogAllElements) {
-      let targetLangText = T.Menu[ele.innerText];
-      let titleText = T.Menu[ele.title];
+      let targetLangText = texe.MT(ele.innerText);
+      let titleText = texe.MT(ele.title);
       if(titleText) ele.title = titleText;
       if (!targetLangText) {
         if (ele.nodeName === "INPUT" && ele.type === "button") {
-          targetLangText = T.Menu[ele.value];
+          targetLangText = texe.MT(ele.value);
           if (!targetLangText) continue;
           ele.value = targetLangText;
         }
@@ -198,9 +212,16 @@ export function applyMenuTranslation(T) {
       }
     }
   }
-}
 
-export function observeFactory(observeTarget, fn) {
+  function handleComfyNewUIMenu(mutationsList)
+  {
+    for (let mutation of mutationsList) {
+      texe.translateAllText(mutation.target);
+    }
+  }
+}
+export function observeFactory(observeTarget, fn, subtree=false) {
+  if (!observeTarget) return;
   const observer = new MutationObserver(function (mutationsList, observer) {
     fn(mutationsList, observer);
   });
@@ -208,6 +229,7 @@ export function observeFactory(observeTarget, fn) {
   observer.observe(observeTarget, {
     childList: true,
     attributes: true,
+    subtree: subtree,
   });
   return observer;
 }
